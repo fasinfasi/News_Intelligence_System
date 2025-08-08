@@ -19,7 +19,7 @@ def fetch_news(query="AI", language="en", page_size=5):
     
     if response.status_code == 200:
         for i, article in enumerate(data['articles'], 1):
-            print(f"\n{i}. {article['title']}\n   {article['description']}\n")
+            print(f"\n{i}. {article['title']}\n     {article['description']}\n")
         return data['articles']
     else:
         print("Error:", data)
