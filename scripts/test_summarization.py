@@ -5,6 +5,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from modules.summarizers import pegasus_summarize, bert_summarize
 from scripts.test_newsapi import fetch_news
+from modules.logger import log_summary
 
 
 if __name__ == "__main__":
@@ -21,3 +22,6 @@ if __name__ == "__main__":
 
         print("\nBERT Summary:")
         print(bert_summarize(content))
+
+        log_summary("PEGASUS", article, pegasus_summarize(content))
+        log_summary("BERT", article, bert_summarize(content))

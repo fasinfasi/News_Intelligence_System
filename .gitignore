@@ -1,2 +1,13 @@
 venv/
 .env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+mlruns/
+mlflow_logs/
+.ipynb_checkpoints/
