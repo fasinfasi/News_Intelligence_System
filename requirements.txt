@@ -6,3 +6,4 @@ bert-extractive-summarizer
 spacy
 sentencepiece
 mlflow
+boto3
