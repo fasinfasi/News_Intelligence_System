@@ -12,5 +12,26 @@
     "chosen_model": "PEGASUS",
     "bert_summary": "El-Fasher is under the control of paramilitaries accused of mass executions and crimes against humanity.",
     "pegasus_summary": "Hundreds of people have taken to the streets of El-Fasher, a town in northern Colombia, to protest against the government's decision to lift a state of emergency imposed in the area after a series of killings by left-wing paramilitaries in recent months, reports the BBC's Clarissa Sebag-Montefiore."
+  },
+  {
+    "timestamp": "2025-11-01 09:45:24",
+    "article_title": "The King is expected to fund Andrew's move - but where does he get his money?",
+    "chosen_model": "PEGASUS",
+    "bert_summary": "The language of Buckingham Palace's statement is \"very brutal\", royal historian Kelly Swaby tells the BBC.",
+    "pegasus_summary": "The Queen has said she is \"deeply saddened\" by the death of Prince Harry's mother, Diana, Princess of Wales, who was killed in a car crash in Paris on 24 July, and that she is \"shocked and deeply saddened\" by the loss of her \"beautiful daughter\"."
+  },
+  {
+    "timestamp": "2025-11-01 09:58:17",
+    "article_title": "Canoeist banned for 'explicit' social media post",
+    "chosen_model": "PEGASUS",
+    "bert_summary": "A British canoeist is banned for two years for posting \"explicit\" footage of himself on social media.",
+    "pegasus_summary": "BBC Sport takes a look at some of the quirkier snippets from the news in the world of sport over the past 24 hours - all of which have been reported by BBC News Online and our partners at the BBC Sport website, BBC Radio 4 and BBC Radio 5 live, plus the BBC Sport app."
+  },
+  {
+    "timestamp": "2025-11-01 10:05:47",
+    "article_title": "'No inch here was spared': Hurricane Melissa destroys Jamaica town",
+    "chosen_model": "BERT",
+    "bert_summary": "The BBC’s Nada Tawfik reports from Black River, where the strongest storm to hit the country in modern history has left scenes of desperation.",
+    "pegasus_summary": "More than a million people have been left homeless by Cyclone Pam, which has hit the east coast of South Sudan and is heading towards the capital, Khartoum, and the port city of Dar es-Salaam, where it is expected to continue battering the country for at least a week."
   }
 ]

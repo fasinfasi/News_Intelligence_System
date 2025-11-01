@@ -10,7 +10,7 @@ st.set_page_config(page_title="NewsBoss", page_icon="📰", layout="centered")
 # Add modules path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'modules')))
 from summarizers import pegasus_summarize, bert_summarize
-from s3_storage import upload_summary_to_s3
+from s3_storage import upload_summary_to_s3, upload_feedback_to_s3
 
 # RSS Feed URL
 RSS_FEED_URL = "https://feeds.bbci.co.uk/news/rss.xml"
@@ -30,10 +30,13 @@ def fetch_rss_articles(feed_url):
     return articles
 
 
-# ---------------- Save feedback locally ----------------
+# ---------------- Save feedback locally AND to S3 ----------------
 def save_feedback(article_title, chosen_model, bert_summary, pegasus_summary):
-    
-    # Save feedback locally
+    """
+    Save feedback both locally as JSON and to S3.
+    Returns (success: bool, message: str).
+    """
+    # Define feedback file path
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
     feedback_dir = os.path.join(project_root, 'ab_testing', 'feedbacks')
     os.makedirs(feedback_dir, exist_ok=True)
@@ -48,6 +51,11 @@ def save_feedback(article_title, chosen_model, bert_summary, pegasus_summary):
         "pegasus_summary": pegasus_summary
     }
 
+    local_success = False
+    s3_success = False
+    messages = []
+
+    # -------- Save locally --------
     try:
         # Load existing feedback data
         data = []
@@ -90,10 +98,29 @@ def save_feedback(article_title, chosen_model, bert_summary, pegasus_summary):
             os.remove(feedback_file)
         os.rename(tmp_file, feedback_file)
 
-        return True, f"✅ Feedback saved successfully at: `{feedback_file}`"
+        local_success = True
+        messages.append(f"✅ Thank you for your Feedback which is really useful to us☺️")
 
     except Exception as e:
-        return False, f"❌ Failed to save feedback: {str(e)}"
+        messages.append(f"⚠️ Failed to save feedback locally: {str(e)}")
+
+    # -------- Upload to S3 --------
+    try:
+        s3_success, s3_error = upload_feedback_to_s3(feedback_data)
+        
+        if s3_success:
+            messages.append("✅ Feedback uploaded to S3 successfully!")
+        else:
+            messages.append(f"⚠️ Failed to upload feedback to S3: {s3_error}")
+    
+    except Exception as e:
+        messages.append(f"⚠️ S3 upload error: {str(e)}")
+
+    # Determine overall success
+    overall_success = local_success or s3_success
+    combined_message = "\n\n".join(messages)
+    
+    return overall_success, combined_message
 
 
 # ---------------- STREAMLIT APP ----------------
@@ -152,6 +179,8 @@ if selected_article:
             # Reset feedback saved state for new summary
             if "feedback_saved" in st.session_state:
                 del st.session_state["feedback_saved"]
+            if "feedback_message" in st.session_state:
+                del st.session_state["feedback_message"]
 
     # ---------------- Feedback Section ----------------
     # Show feedback section only if summaries exist in session state
@@ -161,37 +190,50 @@ if selected_article:
 
         # Check if feedback already saved for current article
         if st.session_state.get("feedback_saved", False):
-            st.success("✅ Thank you for your feedback! It has been saved successfully.")
+            # Display the saved feedback message
+            feedback_msg = st.session_state.get("feedback_message", "✅ Thank you for your feedback!")
+            
+            # Check if there were any warnings in the message
+            if "⚠️" in feedback_msg:
+                st.warning(feedback_msg)
+            else:
+                st.success(feedback_msg)
         else:
             # Create two columns for feedback buttons
             col1, col2 = st.columns(2)
             
             with col1:
-                if st.button("👍 Prefer BERT", use_container_width=True):
-                    success, message = save_feedback(
-                        st.session_state["current_article"]["title"],
-                        "BERT",
-                        st.session_state["bert_summary"],
-                        st.session_state["pegasus_summary"]
-                    )
+                if st.button("👍 Prefer BERT", use_container_width=True, key="feedback_bert"):
+                    # Set the flag IMMEDIATELY before any processing
+                    st.session_state["feedback_saved"] = True
                     
-                    if success:
-                        st.session_state["feedback_saved"] = True
-                        st.rerun()
-                    else:
-                        st.error(message)
+                    with st.spinner("Saving feedback..."):
+                        success, message = save_feedback(
+                            st.session_state["current_article"]["title"],
+                            "BERT",
+                            st.session_state["bert_summary"],
+                            st.session_state["pegasus_summary"]
+                        )
+                        
+                        st.session_state["feedback_message"] = message
+                    
+                    # Force rerun to show the success message
+                    st.rerun()
             
             with col2:
-                if st.button("👍 Prefer PEGASUS", use_container_width=True):
-                    success, message = save_feedback(
-                        st.session_state["current_article"]["title"],
-                        "PEGASUS",
-                        st.session_state["bert_summary"],
-                        st.session_state["pegasus_summary"]
-                    )
+                if st.button("👍 Prefer PEGASUS", use_container_width=True, key="feedback_pegasus"):
+                    # Set the flag IMMEDIATELY before any processing
+                    st.session_state["feedback_saved"] = True
                     
-                    if success:
-                        st.session_state["feedback_saved"] = True
-                        st.rerun()
-                    else:
-                        st.error(message)
+                    with st.spinner("Saving feedback..."):
+                        success, message = save_feedback(
+                            st.session_state["current_article"]["title"],
+                            "PEGASUS",
+                            st.session_state["bert_summary"],
+                            st.session_state["pegasus_summary"]
+                        )
+                        
+                        st.session_state["feedback_message"] = message
+                    
+                    # Force rerun to show the success message
+                    st.rerun()

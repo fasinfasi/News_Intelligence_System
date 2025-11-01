@@ -80,8 +80,11 @@ def upload_feedback_to_s3(feedback_data):
         except s3_client.exceptions.NoSuchKey:
             # File doesn't exist yet, create empty list
             data = []
+        except json.JSONDecodeError:
+            # Corrupted JSON, start fresh
+            data = []
         except Exception:
-            # Any other error (corrupted JSON etc.), create empty list
+            # Any other error, create empty list
             data = []
         
         # Append new feedback
@@ -102,6 +105,9 @@ def upload_feedback_to_s3(feedback_data):
             }
         )
         
+        print(f"✅ Feedback uploaded to S3: {s3_key}")
         return True, None
     except Exception as e:
-        return False, str(e)
+        error_msg = f"Error uploading feedback to S3: {str(e)}"
+        print(f"❌ {error_msg}")
+        return False, error_msg
