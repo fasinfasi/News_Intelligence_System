@@ -1,0 +1,16 @@
+[
+  {
+    "timestamp": "2025-11-01 09:31:45",
+    "article_title": "Just Stop Oil trio cleared over Stonehenge orange powder protest",
+    "chosen_model": "PEGASUS",
+    "bert_summary": "The trio are cleared of all charges after citing human rights law in their defence.",
+    "pegasus_summary": "Egypt's President Abdel Fattah al-Sisi has pardoned former intelligence chief Omar al-Bashir, ex-justice minister Abdelhadi al-Khawaja and journalist Wael Ghonim, who were jailed last year on charges of plotting to overthrow his government, state media reported on Monday night.."
+  },
+  {
+    "timestamp": "2025-11-01 09:36:12",
+    "article_title": "More than 60,000 flee Sudanese city after its capture by RSF militia - UN",
+    "chosen_model": "PEGASUS",
+    "bert_summary": "El-Fasher is under the control of paramilitaries accused of mass executions and crimes against humanity.",
+    "pegasus_summary": "Hundreds of people have taken to the streets of El-Fasher, a town in northern Colombia, to protest against the government's decision to lift a state of emergency imposed in the area after a series of killings by left-wing paramilitaries in recent months, reports the BBC's Clarissa Sebag-Montefiore."
+  }
+]

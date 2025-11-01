@@ -1,5 +1,9 @@
 import boto3
 import os
+import re
+import hashlib
+import json
+import io
 from datetime import datetime
 
 # Load environment variables
@@ -21,7 +25,21 @@ def upload_summary_to_s3(model_type, article, summary_text):
     Uploads a news summary to S3 with a meaningful filename.
     """
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    safe_title = "".join(c for c in article["title"] if c.isalnum() or c in (" ", "_")).strip().replace(" ", "_")
+    # Create Keep it readable while removing punctuation and limiting length.
+    raw_title = (article.get("title") or "").strip()
+    # fallback to URL when title missing
+    if not raw_title:
+        raw_title = article.get("url", "")
+
+    # Remove punctuation except word chars and spaces, then replace whitespace/hyphens with underscore
+    slug = re.sub(r"[^\w\s-]", "", raw_title)
+    slug = re.sub(r"[\s-]+", "_", slug).strip("_")
+    slug = slug[:100]  # limit length to avoid very long filenames
+
+    # short deterministic hash suffix from the raw title
+    hash_suffix = hashlib.sha1(raw_title.encode("utf-8")).hexdigest()[:8]
+
+    safe_title = f"{slug}_{hash_suffix}" if slug else hash_suffix
 
     file_name = f"{model_type}_{safe_title}_{timestamp}.txt"
 
@@ -42,3 +60,48 @@ def upload_summary_to_s3(model_type, article, summary_text):
         print(f"✅ Summary uploaded to S3: {file_name}")
     except Exception as e:
         print(f"❌ Error uploading summary to S3: {e}")
+
+
+def upload_feedback_to_s3(feedback_data):
+    """
+    Appends feedback data to the feedbacks.json file in S3.
+    Downloads existing JSON, appends new entry, and uploads back.
+    """
+    s3_key = 'ab_testing/feedbacks/feedbacks.json'
+    
+    try:
+        # Try to download existing JSON from S3
+        try:
+            response = s3_client.get_object(Bucket=AWS_BUCKET_NAME, Key=s3_key)
+            existing_json = response['Body'].read().decode('utf-8')
+            data = json.loads(existing_json)
+            if not isinstance(data, list):
+                data = []
+        except s3_client.exceptions.NoSuchKey:
+            # File doesn't exist yet, create empty list
+            data = []
+        except Exception:
+            # Any other error (corrupted JSON etc.), create empty list
+            data = []
+        
+        # Append new feedback
+        data.append(feedback_data)
+        
+        # Convert to JSON string with proper formatting
+        json_content = json.dumps(data, ensure_ascii=False, indent=2)
+        
+        # Upload back to S3
+        s3_client.put_object(
+            Bucket=AWS_BUCKET_NAME,
+            Key=s3_key,
+            Body=json_content.encode('utf-8'),
+            ContentType='application/json',
+            Metadata={
+                'uploaded_by': 'newsboss_frontend',
+                'last_updated': feedback_data['timestamp']
+            }
+        )
+        
+        return True, None
+    except Exception as e:
+        return False, str(e)

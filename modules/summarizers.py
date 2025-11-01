@@ -21,14 +21,14 @@ def pegasus_summarize(text):
     summary_ids = pegasus_model.generate(
         **tokens,
         min_length=60,   # about 3–4 lines
-        max_length=120,  # about 5–6 lines
+        max_length=140,  # about 5–6 lines
         do_sample=False
     )
     return pegasus_tokenizer.decode(summary_ids[0], skip_special_tokens=True)
 
 # BERT Summarizer (extractive)
 def bert_summarize(text):
-    summary = bert_model(text, num_sentences=4)  # ~4 sentences
+    summary = bert_model(text, num_sentences=8)  # ~4 sentences
     return summary
 
 if __name__ == "__main__":
