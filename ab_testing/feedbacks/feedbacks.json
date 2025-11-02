@@ -75,5 +75,12 @@
     "chosen_model": "BERT",
     "bert_summary": "Many freshers come with high expectations of what they imagine will be the best years of their lives.",
     "pegasus_summary": "BBC News takes a look back at some of the highlights of freshers' week at the University of Bath.., and looks at some of the challenges faced by students in their first year at university.., and looks at some of the bright spots.., and looks at some of the challenges faced by students in their first year at university.., and looks at some of the bright spots.., and looks at some of the challenges faced by students in their first year at university.., and looks at some of the challenges faced by students in their first year at university.., and looks at some of the challenges faced by students in their first year at university"
+  },
+  {
+    "timestamp": "2025-11-02 10:53:42",
+    "article_title": "Tutankhamun tomb on display in full for first time as Grand Museum opens in Egypt",
+    "chosen_model": "PEGASUS",
+    "bert_summary": "The launch of the billion-dollar site sees fresh calls for the return of antiquities held in museums overseas.",
+    "pegasus_summary": "The Louvre in Paris has opened its doors to the public for the first time in more than a century, offering visitors a rare glimpse into the museum's collection of more than 3,800 artefacts dating back to the Roman and Egyptian periods.... and it's not all good news for the Louvre."
   }
 ]

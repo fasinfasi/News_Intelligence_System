@@ -10,4 +10,6 @@ __pycache__/
 Thumbs.db
 mlruns/
 mlflow_logs/
+airflow/logs/
+airflow/data/
 .ipynb_checkpoints/
