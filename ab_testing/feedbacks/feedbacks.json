@@ -33,5 +33,47 @@
     "chosen_model": "BERT",
     "bert_summary": "The BBC’s Nada Tawfik reports from Black River, where the strongest storm to hit the country in modern history has left scenes of desperation.",
     "pegasus_summary": "More than a million people have been left homeless by Cyclone Pam, which has hit the east coast of South Sudan and is heading towards the capital, Khartoum, and the port city of Dar es-Salaam, where it is expected to continue battering the country for at least a week."
+  },
+  {
+    "timestamp": "2025-11-02 08:32:32",
+    "article_title": "Salah shines as Slot & Liverpool get fans' backing",
+    "chosen_model": "BERT",
+    "bert_summary": "When Liverpool needed a boost, the Anfield crowd motivated the Reds to a vital win - with Mohamed Salah returning to form.",
+    "pegasus_summary": "Liverpool moved level on points with Manchester City at the top of the Premier League thanks to a hard-fought win at home to West Bromwich Albion on Saturday, while the Premier League leaders were held to a goalless draw at Stoke City in the day's early kick-off on Saturday evening."
+  },
+  {
+    "timestamp": "2025-11-02 08:36:25",
+    "article_title": "300 million tourists just visited this breathtaking corner of China. There's a side they didn't see",
+    "chosen_model": "PEGASUS",
+    "bert_summary": "China has repackaged Xinjiang into a tourist haven, touting \"ethnic\" experiences that activists say it's trying to erase.",
+    "pegasus_summary": "China's Xinjiang region is home to the world's largest Muslim population, but it's also home to some of the world's worst human rights abuses, including the internment of hundreds of thousands of Muslim Uighurs and other ethnic minorities in \"re-education camps\" since 2009."
+  },
+  {
+    "timestamp": "2025-11-02 08:39:49",
+    "article_title": "Key town faces 'multi-thousand' Russian force, top Ukraine commander admits",
+    "chosen_model": "BERT",
+    "bert_summary": "Oleksandr Syrskyi denies Russian reports that Ukrainian troops are surrounded in the eastern town of Pokrovsk.",
+    "pegasus_summary": "Ukraine's defence minister says his country's armed forces are not involved in any fighting with pro-Russian separatists in the east of the country, as reported by the BBC's Newsnight programme and Russian news agency Ria-Novosti on Monday night and on Tuesday morning - despite reports to the contrary."
+  },
+  {
+    "timestamp": "2025-11-02 08:42:09",
+    "article_title": "Kenyan landslide kills 21 after heavy rainfall",
+    "chosen_model": "PEGASUS",
+    "bert_summary": "Kenya's government says 30 other people are missing following downpours in the west of the country.",
+    "pegasus_summary": "At least 12 people have been killed in floods in Kenya, the country's deadliest in more than a decade. The death toll is expected to rise as more bodies are recovered, the government says, adding that some people may have been swept away by the currents as they tried to flee their homes."
+  },
+  {
+    "timestamp": "2025-11-02 08:50:15",
+    "article_title": "Watch: Police rush to scene of Cambridgeshire train attack",
+    "chosen_model": "PEGASUS",
+    "bert_summary": "Emergency services rush to the scene at Huntingdon train station after stabbing attack that injured at least 10 people.",
+    "pegasus_summary": "At least 10 people have been injured in a knife attack at a train station in Cambridgeshire, police have said, in what they are treating as a \"terrorist-related\" incident - but it is unclear if there is any link between the two attacks, which took place in the early hours of the morning."
+  },
+  {
+    "timestamp": "2025-11-02 10:16:04",
+    "article_title": "Not having the time of your life at uni? You're not alone",
+    "chosen_model": "BERT",
+    "bert_summary": "Many freshers come with high expectations of what they imagine will be the best years of their lives.",
+    "pegasus_summary": "BBC News takes a look back at some of the highlights of freshers' week at the University of Bath.., and looks at some of the challenges faced by students in their first year at university.., and looks at some of the bright spots.., and looks at some of the challenges faced by students in their first year at university.., and looks at some of the bright spots.., and looks at some of the challenges faced by students in their first year at university.., and looks at some of the challenges faced by students in their first year at university.., and looks at some of the challenges faced by students in their first year at university"
   }
 ]

@@ -1,34 +1,24 @@
 version: '3.8'
+
+x-airflow-common:
+  &airflow-common
+  image: apache/airflow:2.9.1-python3.10
+  environment:
+    &airflow-common-env
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+    AIRFLOW__CORE__FERNET_KEY: H8fYZ1RJzHfRtc_B8BB0g5e0jmJjzsmQAUrh8GWDe3Q=
+    AIRFLOW__CORE__LOAD_EXAMPLES: "False"
+    AIRFLOW__WEBSERVER__EXPOSE_CONFIG: "True"
+  volumes:
+    - ./dags:/opt/airflow/dags
+    - ./logs:/opt/airflow/logs
+    - ./pipelines:/opt/airflow/pipelines
+  user: "${AIRFLOW_UID:-50000}:0"
+  depends_on:
+    - postgres
+
 services:
-  airflow:
-    image: apache/airflow:2.9.1-python3.10
-    restart: always
-    depends_on:
-      - postgres
-    environment:
-      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
-      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
-      - AIRFLOW__CORE__FERNET_KEY=H8fYZ1RJzHfRtc_B8BB0g5e0jmJjzsmQAUrh8GWDe3Q=
-      - AIRFLOW__CORE__LOAD_EXAMPLES=False
-      - AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True
-    volumes:
-      - ./dags:/opt/airflow/dags
-      - ./logs:/opt/airflow/logs
-    ports:
-      - "8080:8080"
-    command: webserver
-
-  scheduler:
-    image: apache/airflow:2.9.1-python3.10
-    depends_on:
-      - airflow
-      - postgres
-    restart: always
-    command: scheduler
-    volumes:
-      - ./dags:/opt/airflow/dags
-      - ./logs:/opt/airflow/logs
-
   postgres:
     image: postgres:13
     restart: always
@@ -38,6 +28,24 @@ services:
       POSTGRES_DB: airflow
     volumes:
       - postgres_db:/var/lib/postgresql/data
+
+  airflow-init:
+    <<: *airflow-common
+    command: bash -c "airflow db init && airflow users create --username airflow --password airflow --firstname Admin --lastname User --role Admin --email admin@example.com"
+    depends_on:
+      - postgres
+
+  webserver:
+    <<: *airflow-common
+    command: webserver
+    ports:
+      - "8080:8080"
+    restart: always
+
+  scheduler:
+    <<: *airflow-common
+    command: scheduler
+    restart: always
 
 volumes:
   postgres_db:
