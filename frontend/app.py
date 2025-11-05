@@ -138,7 +138,7 @@ if prev_selected and prev_selected not in article_titles:
     article_titles.insert(0, prev_selected)
 
 # Use session_state key for persistence
-selected_title = st.selectbox("Choose a topic:", article_titles, key="selected_title")
+selected_title = st.selectbox("Choose a headline from these latest news:", article_titles, key="selected_title")
 
 # Map titles to articles for lookup
 title_to_article = {a["title"]: a for a in articles}

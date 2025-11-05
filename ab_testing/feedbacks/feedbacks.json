@@ -82,5 +82,40 @@
     "chosen_model": "PEGASUS",
     "bert_summary": "The launch of the billion-dollar site sees fresh calls for the return of antiquities held in museums overseas.",
     "pegasus_summary": "The Louvre in Paris has opened its doors to the public for the first time in more than a century, offering visitors a rare glimpse into the museum's collection of more than 3,800 artefacts dating back to the Roman and Egyptian periods.... and it's not all good news for the Louvre."
+  },
+  {
+    "timestamp": "2025-11-02 11:01:03",
+    "article_title": "Devastation on repeat: How climate change is worsening Pakistan's deadly floods",
+    "chosen_model": "PEGASUS",
+    "bert_summary": "The BBC speaks to those who have lost everything in this year's monsoon season and finds out why it will likely happen again.",
+    "pegasus_summary": "Last year's devastating floods in Kerala, India, left thousands of people homeless and in need of food, shelter and medical care, as they struggled to recover from the damage caused by heavy rains and cyclonic storms that hit the state in late June and early July, killing more than 200 people."
+  },
+  {
+    "timestamp": "2025-11-02 11:03:53",
+    "article_title": "How TikTok put a centuries-old Hull festival on the global map",
+    "chosen_model": "PEGASUS",
+    "bert_summary": "TikTokers such as Kalani Ghost Hunter, Redheadresidence and PT Vlogs posted content from the fair.",
+    "pegasus_summary": "Social media users have been sharing their experiences at this year's Mobile World Congress (MWC), which took place in Barcelona, Spain, from 11 to 15 March.<n> The post Mobile World Congress 2017: Mobile TikTokers share their experiences appeared first on BBC News website .  Subscribe to BBC News HERE: http://bit.ly/1rbfUog"
+  },
+  {
+    "timestamp": "2025-11-02 14:04:18",
+    "article_title": "My one-year-old eats books, toys, tables and even his cot",
+    "chosen_model": "PEGASUS",
+    "bert_summary": "Junior has a condition called pica that makes him crave and eat inedible objects.",
+    "pegasus_summary": "A dog called Junior who has a condition that makes him crave and eat inedible objects, has been adopted by a family in the UK who want him to have a normal life, reports the BBC's Clarissa Sebag-Montefiore from the BBC's Newsround programme in London."
+  },
+  {
+    "timestamp": "2025-11-02 14:06:59",
+    "article_title": "Andrew arranged palace visit for crypto-mining firm which had £1.4m deal with ex-wife",
+    "chosen_model": "BERT",
+    "bert_summary": "A company paying Sarah Ferguson was given a private tour of Buckingham Palace while the late Queen was in residence, BBC can reveal.",
+    "pegasus_summary": "The Duchess of Cambridge's mother-in-law was given a private tour of the Queen's official residence while she was in charge, it has emerged, after a Freedom of Information request by BBC Radio 4's Woman's Hour programme and the BBC News website, it has emerged."
+  },
+  {
+    "timestamp": "2025-11-05 10:30:02",
+    "article_title": "Rachel Reeves soft-launches tax rises",
+    "chosen_model": "PEGASUS",
+    "bert_summary": "The Chancellor refuses to rule out tax rises in Budget.",
+    "pegasus_summary": "Chancellor of the Exchequer George Osborne has told BBC Radio 4's Today programme that he will not be raising VAT or National Insurance in his Budget on Wednesday, but he will be looking at ways to reduce the cost of living for those who live in the most expensive parts of the country, such as London."
   }
 ]

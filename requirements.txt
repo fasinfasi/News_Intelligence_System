@@ -5,10 +5,6 @@ torch
 bert-extractive-summarizer
 spacy
 sentencepiece
-mlflow
 boto3
 streamlit
 feedparser
-pandas
-apache-airflow
-newsapi-python
